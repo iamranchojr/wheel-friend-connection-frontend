@@ -1,8 +1,10 @@
-interface TextAreaProps {
+import { TextareaHTMLAttributes } from 'react';
+
+interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
 }
 
-export default function TextArea({ label }: TextAreaProps) {
+export default function TextArea({ label, ...props }: TextAreaProps) {
   return (
     <div>
       {label && (
@@ -13,6 +15,7 @@ export default function TextArea({ label }: TextAreaProps) {
       <textarea
         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full px-4 py-3"
         rows={3}
+        {...props}
       />
     </div>
   );
