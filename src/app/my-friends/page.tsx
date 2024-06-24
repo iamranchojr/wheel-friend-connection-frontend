@@ -1,6 +1,6 @@
 'use client';
 
-import FriendCard, { FriendStatus } from '@/components/FriendCard';
+import FriendCard from '@/components/FriendCard';
 import Spinner from '@/components/Spinner';
 import { Friend } from '@/domain/models';
 import { friendsFetcher } from '@/domain/services/friend';
@@ -19,6 +19,7 @@ export default function MyFriends() {
     isLoading: isFetchingFriends,
     size,
     setSize,
+    mutate: mutateFriendsData,
   } = useSWRInfinite((pageIndex: number, previousPageData?: Friend[]) => {
     let seekId = 0;
 
@@ -58,7 +59,7 @@ export default function MyFriends() {
 
         {friends.map((friend, index) => (
           <div key={index} className="mb-3">
-            <FriendCard friend={friend} />
+            <FriendCard friend={friend} onMutate={mutateFriendsData} />
           </div>
         ))}
       </div>
