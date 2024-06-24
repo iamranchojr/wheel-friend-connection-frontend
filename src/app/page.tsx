@@ -19,7 +19,9 @@ export default function Home() {
           <div className="text-[25px]">Hello {user.name}</div>
           <div className="text-[15px]">{user.email}</div>
           <div className="flex gap-2 text-[15px]">
-            <div className="text-gray-700">{user.bio}.</div>
+            <div className="text-gray-700">
+              {user.bio && user.bio != '' ? user.bio : 'No bio set'}.
+            </div>
             <div className="flex cursor-pointer gap-1">
               Edit Bio <RiPencilLine size={18} />
             </div>
