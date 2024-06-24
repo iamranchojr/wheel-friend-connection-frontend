@@ -1,0 +1,1 @@
+export { fetchFriendWithOtherUser } from './fetchFriendWithOtherUser';

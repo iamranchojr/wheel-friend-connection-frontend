@@ -18,3 +18,8 @@ export const userSchema = yup
 export interface User extends yup.InferType<typeof userSchema> {}
 
 export const castToUser = (data: any): User => userSchema.cast(data);
+
+export const castToUserList = (data: any): User[] => {
+  const parsedData = yup.array().of(userSchema).cast(data);
+  return parsedData ?? [];
+};

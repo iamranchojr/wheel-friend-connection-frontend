@@ -7,7 +7,7 @@ interface SpinnerProps {
 }
 
 export default function Spinner({
-  size = 50,
+  size = 15,
   color = '#fff',
   className = '',
 }: SpinnerProps) {

@@ -27,6 +27,6 @@ export const useAuthStore = create<AuthState>()(
     {
       name: 'wfc__auth-state',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );
