@@ -139,7 +139,7 @@ export default function UserCard({
               )}
 
               {friendRequestSent && (
-                <div className="text-yellow-800 text-[15px]">
+                <div className="text-yellow-600 text-[15px]">
                   Your friend request was sent
                 </div>
               )}
@@ -162,6 +162,13 @@ export default function UserCard({
                   </div>
                 )}
 
+              {friend?.status == FriendStatus.Declined &&
+                friend.recipientId == currentUser?.id && (
+                  <div className="text-red-600 text-[15px]">
+                    You declined this friend request
+                  </div>
+                )}
+
               {friend?.status == FriendStatus.Pending &&
                 friend.senderId != currentUser?.id && (
                   <div className="text-green-800 text-[15px]">
@@ -172,6 +179,12 @@ export default function UserCard({
                     . Go to my friends to manage this request.
                   </div>
                 )}
+
+              {friend?.status == FriendStatus.Accepted && (
+                <div className="text-green-700 text-[15px]">
+                  You are friends with {user.name}
+                </div>
+              )}
             </div>
           </div>
         </div>
