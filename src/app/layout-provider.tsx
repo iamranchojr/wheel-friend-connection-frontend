@@ -28,7 +28,7 @@ export default function LayoutProvider({
 
       // connect to user websocket channel
       websocket = new WebSocket(
-        `ws://${process.env.NEXT_PUBLIC_API_HOST}/ws/${user.id}`,
+        `${process.env.NEXT_PUBLIC_WEBSOCKET_URL}/ws/${user.id}`,
       );
 
       websocket.onmessage = (event) => {

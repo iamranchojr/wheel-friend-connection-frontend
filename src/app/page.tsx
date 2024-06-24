@@ -58,7 +58,7 @@ export default function Home() {
       for (const userFriend of userFriends) {
         // connect to user websocket channel
         const websocket = new WebSocket(
-          `ws://${process.env.NEXT_PUBLIC_API_HOST}/ws/${userFriend.id}`,
+          `${process.env.NEXT_PUBLIC_WEBSOCKET_URL}/ws/${userFriend.id}`,
         );
 
         websocket.onopen = (event) => {
