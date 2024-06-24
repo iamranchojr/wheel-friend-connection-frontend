@@ -20,28 +20,22 @@ export default function FindFriends() {
     isLoading: isFetchingUsers,
     size,
     setSize,
-  } = useSWRInfinite(
-    (pageIndex: number, previousPageData?: User[]) => {
-      let seekId = 0;
+  } = useSWRInfinite((pageIndex: number, previousPageData?: User[]) => {
+    let seekId = 0;
 
-      if (previousPageData) {
-        seekId = previousPageData[previousPageData.length - 1].id;
-      }
+    if (previousPageData) {
+      seekId = previousPageData[previousPageData.length - 1].id;
+    }
 
-      return {
-        key: 'fetch_users',
-        queryParams: {
-          seekId,
-          query,
-          limit: PAGE_LIMIT,
-        },
-      };
-    },
-    usersFetcher,
-    {
-      revalidateFirstPage: false,
-    },
-  );
+    return {
+      key: 'fetch_users',
+      queryParams: {
+        seekId,
+        query,
+        limit: PAGE_LIMIT,
+      },
+    };
+  }, usersFetcher);
 
   const users: User[] = [];
 
@@ -64,7 +58,7 @@ export default function FindFriends() {
         )}
 
         {users.map((user, i) => (
-          <div key={i} className="mb-5">
+          <div key={i} className="mb-3">
             <UserCard
               user={user}
               expand={selectedUser == i}
