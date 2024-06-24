@@ -6,7 +6,7 @@ export default function StatusUpdates() {
   return (
     <div>
       <div className="text-[25px] font-medium">Status Updates</div>
-      <div className="max-w-[50%] mx-auto mt-8">
+      <div className="max-w-[50%] mt-5">
         {[0, 1, 2].map((i, index) => (
           <div key={index} className="mb-5">
             <UserStatusItem />
