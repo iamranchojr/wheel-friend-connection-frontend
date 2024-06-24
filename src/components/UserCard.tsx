@@ -155,6 +155,13 @@ export default function UserCard({
                   </div>
                 )}
 
+              {friend?.status == FriendStatus.Declined &&
+                friend.senderId == currentUser?.id && (
+                  <div className="text-red-600 text-[15px]">
+                    Your friend request was declined
+                  </div>
+                )}
+
               {friend?.status == FriendStatus.Pending &&
                 friend.senderId != currentUser?.id && (
                   <div className="text-green-800 text-[15px]">
