@@ -23,7 +23,7 @@ export default function Button({
           : variant == 'danger'
           ? 'bg-red-500 text-white hover:bg-red-600'
           : 'hover:bg-gray-100 text-gray-700'
-      } border text-[15px] font-medium py-2 px-4 rounded-lg flex items-center gap-2`}
+      } border text-[15px] font-medium py-2 px-4 rounded-lg flex items-center gap-2 disabled:opacity-50`}
       {...props}>
       {children}
       {loading && (

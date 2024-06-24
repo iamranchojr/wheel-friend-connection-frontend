@@ -1,5 +1,6 @@
 const ROUTES = {
   home: '/',
+  landingPage: '/landing-page',
   login: '/login',
   register: '/register',
   myFriends: '/my-friends',

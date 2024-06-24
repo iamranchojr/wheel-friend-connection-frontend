@@ -2,9 +2,16 @@ import { TextareaHTMLAttributes } from 'react';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
+  yupProps?: any; // for yup data validation
+  errorMessage?: string;
 }
 
-export default function TextArea({ label, ...props }: TextAreaProps) {
+export default function TextArea({
+  label,
+  yupProps,
+  errorMessage,
+  ...props
+}: TextAreaProps) {
   return (
     <div>
       {label && (
@@ -16,7 +23,12 @@ export default function TextArea({ label, ...props }: TextAreaProps) {
         className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full px-4 py-3"
         rows={3}
         {...props}
+        {...yupProps}
       />
+
+      {errorMessage && (
+        <span className="text-red-500 text-sm">{errorMessage}</span>
+      )}
     </div>
   );
 }
