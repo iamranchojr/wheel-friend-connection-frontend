@@ -30,3 +30,5 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 Note: The application will not be functional without the corresponding backend it integrates with. You can find that [here](https://github.com/iamranchojr/wheel-friend-connection-frontend) with instructions on how to run it locally on your device.
+
+If you just want to test things out, you can access a deployed version [here](https://wfc-app-a07cd74c45cb.herokuapp.com/)
