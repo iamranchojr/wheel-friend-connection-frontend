@@ -70,7 +70,7 @@ export default function FriendCard({ friend, onMutate }: FriendProps) {
   const broadcastWebsocketEventToSender = (message: string) => {
     // connect to user websocket channel
     const websocket = new WebSocket(
-      `ws://${process.env.NEXT_PUBLIC_API_HOST}/ws/${friend.sender.id}`,
+      `${process.env.NEXT_PUBLIC_WEBSOCKET_URL}/ws/${friend.sender.id}`,
     );
 
     websocket.onopen = (event) => {
