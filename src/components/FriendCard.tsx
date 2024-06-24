@@ -26,8 +26,15 @@ export default function FriendCard({ friend, onMutate }: FriendProps) {
     try {
       await acceptFriendRequest(friend.id);
       onMutate();
+
+      // show success message
       toast.success(
         `You have successfully accepted the friend request from ${friend.sender.name}`,
+      );
+
+      // broadcast realtime update
+      broadcastWebsocketEventToSender(
+        `${currentUser?.name} accepted your friend request. You can now view their status from status updates page|success`,
       );
     } catch (error) {
       const httpError = error as HttpError;
@@ -46,12 +53,35 @@ export default function FriendCard({ friend, onMutate }: FriendProps) {
       toast.success(
         `You have successfully declined the friend request from ${friend.sender.name}`,
       );
+
+      // broadcast realtime update
+      broadcastWebsocketEventToSender(
+        `${currentUser?.name} declined your friend request. You can no longer send a friend request to this user|error`,
+      );
     } catch (error) {
       const httpError = error as HttpError;
       toast.error(httpError.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  // TODO: this can be moved into a utility function since it's now been defined in multi places
+  const broadcastWebsocketEventToSender = (message: string) => {
+    // connect to user websocket channel
+    const websocket = new WebSocket(
+      `ws://${process.env.NEXT_PUBLIC_API_HOST}/ws/${friend.sender.id}`,
+    );
+
+    websocket.onopen = (event) => {
+      // send message
+      websocket.send(message);
+
+      websocket.onmessage = (event) => {
+        // disconnect once message is received
+        websocket.close();
+      };
+    };
   };
 
   return (

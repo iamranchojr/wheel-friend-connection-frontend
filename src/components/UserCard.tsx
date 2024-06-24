@@ -63,12 +63,34 @@ export default function UserCard({
       toast.success(
         `Your friend request was successfully sent to ${user.name}`,
       );
+
+      // broadcast realtime update
+      broadcastWebsocketEventToRecipient();
     } catch (error) {
       const httpError = error as HttpError;
       toast.error(httpError.message);
     } finally {
       setSendingFriendRequest(false);
     }
+  };
+
+  const broadcastWebsocketEventToRecipient = () => {
+    // connect to user websocket channel
+    const websocket = new WebSocket(
+      `ws://${process.env.NEXT_PUBLIC_API_HOST}/ws/${user.id}`,
+    );
+
+    websocket.onopen = (event) => {
+      // send message
+      websocket.send(
+        `${currentUser?.name} sent you a friend request. Go to my friends to accept or decline|warning`,
+      );
+
+      websocket.onmessage = (event) => {
+        // disconnect once message is received
+        websocket.close();
+      };
+    };
   };
 
   useEffect(() => {
