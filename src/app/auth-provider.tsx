@@ -15,8 +15,6 @@ export default function AuthProvider({
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log(user);
-
     if (user) {
       /* user is authenticated */
 
