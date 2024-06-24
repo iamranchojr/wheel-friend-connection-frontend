@@ -16,8 +16,8 @@ export const friendSchema = yup
       .test((value) =>
         Object.values(FriendStatus).includes(value as FriendStatus),
       ),
-    sender_id: yup.number().required(),
-    recipient_id: yup.number().required(),
+    senderId: yup.number().required(),
+    recipientId: yup.number().required(),
     sender: userSchema.required(),
     recipient: userSchema.required(),
     createdAt: yup.date().nullable(),
