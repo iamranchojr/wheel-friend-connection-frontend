@@ -3,3 +3,4 @@ export {
   registerUser,
   registerUserSchema,
 } from './registerUser';
+export { usersFetcher } from './usersFetcher';

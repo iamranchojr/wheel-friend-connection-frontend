@@ -13,7 +13,7 @@ export interface RegisterUserPayload
   extends yup.InferType<typeof registerUserSchema> {}
 
 export const registerUser = async (
-  payload: RegisterUserPayload
+  payload: RegisterUserPayload,
 ): Promise<AuthResponse> => {
   const response = await http.post('/users/register/', payload);
   return castToAuthResponse(response.data);

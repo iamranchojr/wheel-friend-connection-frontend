@@ -20,7 +20,7 @@ export default function Friend({ status, sentByCurrentUser }: FriendProps) {
           <RiUserSmileLine size={40} className="text-gray-500" />
         </div>
         <div>
-          <div className="text-[20px] font-medium">Sam</div>
+          <div className="text-[19px] font-medium">Sam</div>
           <div className="text-gray-700 text-[15px]">
             You sent a friend request on 24 Jan 2024
           </div>

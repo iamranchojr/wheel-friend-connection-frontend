@@ -90,12 +90,12 @@ http.interceptors.response.use(
       message: 'A network error occurred.',
       errorType: HttpErrorType.networkError,
     } as HttpError);
-  }
+  },
 );
 
 const parseErrorResponse = (
   error: AxiosError<{ error?: string; detail?: any }>,
-  defaultMessage: string
+  defaultMessage: string,
 ): string => {
   if (Array.isArray(error.response?.data)) {
     let combinedError = '';
