@@ -8,12 +8,14 @@ import {
 } from '@/domain/services/user';
 import { HttpError } from '@/lib/http';
 import { useAuthStore } from '@/lib/store';
+import ROUTES from '@/routes';
 import {
   RiEditBoxLine,
   RiLockLine,
   RiPencilLine,
   RiUserAddLine,
 } from '@remixicon/react';
+import Link from 'next/link';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
@@ -86,7 +88,7 @@ export default function Home() {
             <div className="text-gray-700">
               {user.bio && user.bio != '' ? user.bio : 'No bio set'}.
             </div>
-            <div className="flex cursor-pointer gap-1">
+            <div className="flex cursor-pointer gap-1 items-center">
               Edit Bio <RiPencilLine size={18} />
             </div>
           </div>
@@ -96,14 +98,14 @@ export default function Home() {
             {user.status ?? 'n/a'}
           </div>
           <div>
-            <span className="text-gray-500">You have</span>: n/a friends
+            <span className="text-gray-500">You have</span>: TBA friends
           </div>
           <div>
-            <span className="text-gray-500">You have received</span>: n/a
+            <span className="text-gray-500">You have received</span>: TBA
             pending requests
           </div>
           <div>
-            <span className="text-gray-500">You have sent</span>: n/a pending
+            <span className="text-gray-500">You have sent</span>: TBA pending
             requests
           </div>
 
@@ -113,10 +115,12 @@ export default function Home() {
                 <Button onClick={() => setUpdateStatus(true)}>
                   Update status <RiEditBoxLine size={18} />
                 </Button>
-                <Button>
-                  Find friends <RiUserAddLine size={18} />
-                </Button>
-                <Button>
+                <Link href={ROUTES.findFriends}>
+                  <Button>
+                    Find friends <RiUserAddLine size={18} />
+                  </Button>
+                </Link>
+                <Button disabled>
                   Change password <RiLockLine size={18} />
                 </Button>
               </div>
@@ -125,16 +129,23 @@ export default function Home() {
             {updateStatus && (
               <div className="max-w-[50%]">
                 <TextArea
-                  placeholder="Type your new status and click the update button to save"
+                  placeholder="Type your new status and click the update button to save. All your friends currently online will get a realtime notification."
                   onChange={(e) => setStatus(e.target.value)}
                 />
-                <div className="mt-3">
+                <div className="mt-3 flex gap-3">
                   <Button
                     disabled={status == '' || loading}
                     loading={loading}
                     variant="success"
                     onClick={onUpdateUserStatus}>
                     Update <RiEditBoxLine size={18} />
+                  </Button>
+
+                  <Button
+                    disabled={loading}
+                    variant="default"
+                    onClick={() => setUpdateStatus(false)}>
+                    Cancel <RiEditBoxLine size={18} />
                   </Button>
                 </div>
               </div>
